@@ -1,0 +1,20 @@
+Package: langnetr
+Type: Package
+Title: Creates a language network based on similarity 
+Version: 0.1.0
+Authors@R: person("Cynthia", "Siew", email = "cynsiewsq@gmail.com",
+  role = c("aut", "cre"))
+Maintainer: Cynthia Siew <cynsiewsq@gmail.com>
+Description: Converts a list of words into a language network. 
+    Each node in the network is one word in the list. 
+    Edges are placed between pairs of words with edit distance = 1.
+    List of words can be either phonological transcriptions or orthographic representations.
+    Outputs an igraph object for further analysis.
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr,
+    igraph,
+    stringdist
+URL: http://github.com/csqsiew/langnetr 
