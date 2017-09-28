@@ -8,7 +8,7 @@
 levenshtein.distance.number <- function (xsource, targets)
 {
   distances <- stringdist::stringdist(xsource, targets, method = "lv")
-  names(distances) <- 1:length(targets) # orginal code: names(distances) <- targets
+  names(distances) <- 1:length(targets) # orginal code from vwr library: names(distances) <- targets
   return(distances)
 }
 
