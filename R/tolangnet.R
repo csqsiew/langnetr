@@ -9,8 +9,12 @@
 
 tolangnet <- function(wordlist) {
 
-  if (is.character(wordlist) == FALSE) {    # check if wordlist is a character vector
-    stop("Data is not a character vector.") # if not, output an error message
+  if (is.character(wordlist) == FALSE) {    # check if wordlist is character class
+    stop("Data is not of character class.") # if not, output an error message
+  }
+
+  if (is.vector(wordlist) == FALSE) { # check if wordlist is a vector
+    stop("Data is not in a vector.") # if not, output an error message
   }
 
   data_e <- data.frame() # create an empty data frame to store edges
