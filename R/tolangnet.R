@@ -1,6 +1,11 @@
-# The main 'tolangnet' function which converts a list of words to a igraph network object.
-# The list of words must be a character vector.
-# The function outputs a igraph network object.
+#' Converts a list of words to an igraph network object.
+#'
+#' @param wordlist A list of words. Must be a character vector.
+#' @return An igraph object of the language network created from \code{wordlist}.
+#' @examples
+#' somewords <- c('cat', 'bat', 'cap', 'cape')
+#' somewordsnet <- tolangnet(somewords)
+#' plot(somewordsnet) #plots the graph
 
 tolangnet <- function(wordlist) {
 

@@ -1,8 +1,18 @@
-# The nodeindex function maps the node numbers/IDs to the correct labels.
-# Specifically, relabels the 'name' attribute in the igraph object.
-# Note that the IDs are dependent on the ordering specified in the initial wordlist.
+#' Replaces node IDs with their labels.
+#'
+#' @param langnet An igraph object created using the \code{tolangnet} function.
+#' @param wordlist A list of words. Must be a character vector.
+#' @return An igraph object of the language network with updated labels.
+#' @examples
+#' somewords <- c('cat', 'bat', 'cap', 'cape')
+#' somewordsnet <- tolangnet(somewords)
+#' plot(somewordsnet) #plots the graph
+#'
+#' somewordsnet.labelled <- nodeindex(somewordsnet, somewords)
+#' plot(somewordsnet.labelled) #notice that this network has labels...
+#' # note that the generated IDs are dependent on the ordering in the \code{wordlist}.
 
-nodeindex <- function(langnet, wordlist) { # network created from the wordlist
+nodeindex <- function(langnet, wordlist) {                       # network created from the wordlist
 
   oldnames <- as.data.frame(as.numeric(igraph::V(langnet)$name)) # set up the node ids from the language network
   colnames(oldnames) <- 'nodeid'

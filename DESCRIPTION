@@ -14,8 +14,12 @@ Description: Converts a list of words into a language network.
 License: Anyone can use it. 
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
     dplyr,
     igraph,
     stringdist
 URL: http://github.com/csqsiew/langnetr 
+RoxygenNote: 6.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
