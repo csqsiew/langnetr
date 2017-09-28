@@ -10,6 +10,7 @@ Description: Converts a list of words into a language network.
     Edges are placed between pairs of words with edit distance = 1.
     List of words can be either phonological transcriptions or orthographic representations.
     Outputs an igraph object for further analysis.
+    Also relabels node ids with labels.
 License: Anyone can use it. 
 Encoding: UTF-8
 LazyData: true
