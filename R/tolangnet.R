@@ -11,6 +11,7 @@ gc(reset = TRUE)
 #' plot(somewordsnet) #plots the graph
 
 sanity_check <- function(m1, m2) {
+  # function to verify that the adjacency lists are equal.
 
   m1[,1] <- as.character(m1[,1])
   m1[,2] <- as.character(m1[,2])
@@ -208,38 +209,47 @@ t1 = system.time({
 })
 
 t2 = system.time({
-    somewordsnet2 <- tolangnet_apply(wordlist);
+    somewordsnet2     <- tolangnet_apply(wordlist);
     somewordsnet2[,2] <- as.numeric(somewordsnet2[,2])
     somewordsnet2[,1] <- as.numeric(somewordsnet2[,1])
-    somewordsnet2 = somewordsnet2[which(somewordsnet2[,2] > 0),]
+    somewordsnet2     <- somewordsnet2[which(somewordsnet2[,2] > 0),] # <- remove hermits
   })
 
 #-----------------------------------------------------
 # Parallelized version of code
 #-----------------------------------------------------
-# Think of the problem this way. Your computer has a number of
+# Think of the problem this way: Your computer has a number of
 # clusters (logical processors). For each cluster, you are
 # creating a new R instance, which means that you have to
-# instantiate the R libraries you need and pass over the data
-# and functions that you will be using for each instance.
+# instantiate the R libraries, pass over the data, and pass
+# over the functions you will be using for each instance.
+#
+# There is a cost to doing all of that which means that this is
+# not good for small problems. But if the wordlist is large,
+# the cost is worth the extra effort.
+#
+# a 100k word list took me 3 hours with original code and 1 hour
+# with the parallelized code on a machine that has 4 clusters.
 #
 # The code below, assumes you are working in the global environment.
-# There is a way to wrap this into a function......
+# You could just wrap this into a function......
 #
+#
+
 
 t3 = system.time({
 
   # Figure out how many cores are on the computer.
-  nclus = detectCores()
+  nclus <- detectCores()
 
   # Tell R how many clusters to make.
-  clus = makeCluster(nclus)
+  clus <- makeCluster(nclus)
 
-  # Create a vector of same lenght of wordlist. We will use the
+  # Create a vector of same length of wordlist. We will use the
   # modulus operator to divide the data into distinct chunks.
-  # Each chunk will be sent to the individual processor.
-  f = 1:length(wordlist)
-  f = f %% nclus
+  # Each chunk will be sent to each core.
+  f <- 1:length(wordlist)
+  f <- f %% nclus
 
   # These varaibles and functions need to get exported to each cluster.
   clusterExport(clus,
@@ -253,8 +263,8 @@ t3 = system.time({
                 envir=environment()
   )
 
-
-  # Par apply will send (1) chunks of data to be sent for
+  # This section is basically the workhorse.
+  # ParLapply will send (1) chunks of data to be sent for
   # distance finding and (2) the entire wordlist.
   r <- parLapply(
     clus,             # Cluster Object.
@@ -271,17 +281,18 @@ t3 = system.time({
   # r is a list. do.call will collapse the entire list into a matrix.
   somewordsnet3 <- do.call(rbind, r)
 
-  # so some cleaning up of the data.
+  # do some cleaning up of the data.
   somewordsnet3[,2] <- as.numeric(somewordsnet3[,2])
-  somewordsnet3 = somewordsnet3[which(somewordsnet3[,2] > 0),]
+  somewordsnet3     <- somewordsnet3[which(somewordsnet3[,2] > 0),]  # <- remove hermits
 
 })
 
+# Check the times from each run.
 t1
 t2
 t3
 
-# check to make sure that the results are generally the same. some
+# check to make sure that the results are the same. some
 # manipulation to the data is done in here. Arguably, we don't have
 # to create a function to do this check........
 sanity_check(somewordsnet1, somewordsnet2)
