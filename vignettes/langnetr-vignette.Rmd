@@ -80,14 +80,24 @@ plot(words.net.labels,
      vertex.label.family = 'Arial')
 ```
 
-## The toedgelist function  
+## The "helper" functions  
 
-This function returns a dataframe of the *labelled* edgelist of the language network (the standard `as_edgelist` function in `igraph` returns an edgelist with node IDs).
+The `toedgelist` function returns a dataframe of the *labelled* edgelist of the language network (the standard `as_edgelist` function in `igraph` returns an edgelist with node IDs).
+
+The `hermits` function returns a list of hermits from the language network.   
+
+The `giantc` function returns a list of nodes found in the giant component (largest connected component) of the language network.  
+
+These smaller functions just help make life a bit easier for a language researcher :)  
 
 ```{r}
 words.net.edgelist <- langnetr::toedgelist(words.net.labels)
+words.net.hermits <- langnetr::hermits(words.net.labels)
+words.net.giantc <- langnetr::giantc(words.net.labels)
 
-head(words.net.edgelist)
+words.net.edgelist
+words.net.hermits
+words.net.giantc
 ```
 
 ### Comments, suggestions, bugs?  

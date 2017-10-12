@@ -1,4 +1,4 @@
-#' Converts a list of words to an igraph network object.
+#' Converts an igraph network object to an edgelist with labels.
 #'
 #' @param langnet An igraph object created using the \code{tolangnet} function and with label names created with the \code{nodeindex} function.
 #' @return A dataframe of the *labeled* edgelist of the language network created from \code{wordlist}.
