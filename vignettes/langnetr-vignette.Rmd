@@ -2,7 +2,8 @@
 title: "How to use langnetr: A simple example"
 author: "CSQ Siew"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: word_document
+#rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
@@ -77,6 +78,16 @@ plot(words.net.labels,
      vertex.color = 'white', 
      vertex.label.dist=2.5,
      vertex.label.family = 'Arial')
+```
+
+## The toedgelist function  
+
+This function returns a dataframe of the *labelled* edgelist of the language network (the standard `as_edgelist` function in `igraph` returns an edgelist with node IDs).
+
+```{r}
+words.net.edgelist <- langnetr::toedgelist(words.net.labels)
+
+head(words.net.edgelist)
 ```
 
 ### Comments, suggestions, bugs?  
