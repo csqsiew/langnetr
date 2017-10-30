@@ -16,7 +16,7 @@
 testpl <- function(model, getraw = F) { # distribution must already be fitted by fitpl()
   set.seed(1)                                                # for replicability
   ncores <- parallel::detectCores()                          # number of cores in computer
-  bs_p = bootstrap_p(model, no_of_sims=1000, threads=ncores) # run the bootstrapping process
+  bs_p = poweRlaw::bootstrap_p(model, no_of_sims=1000, threads=ncores) # run the bootstrapping process
   xmin <- mean(bs_p$bootstraps[,2])                          # mean of xmin from simulations
   alpha <- mean(bs_p$bootstraps[,3])                         # mean of alpha from simulations
   xminsd <- sd(bs_p$bootstraps[,2])                          # sd of xmin from simulations

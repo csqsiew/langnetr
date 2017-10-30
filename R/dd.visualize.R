@@ -11,23 +11,23 @@ visualize <- function(distribution) {
   test <- distribution
 
   # power law
-  m_pl = displ$new(test)
-  est = estimate_xmin(m_pl) # estimate lower threshold
+  m_pl = poweRlaw::displ$new(test)
+  est = poweRlaw::estimate_xmin(m_pl) # estimate lower threshold
   m_pl$setXmin(est) # update power law object
 
   # log normal
-  m_ln = dislnorm$new(test)
-  est = estimate_xmin(m_ln) # estimate lower threshold
+  m_ln = poweRlaw::dislnorm$new(test)
+  est = poweRlaw::estimate_xmin(m_ln) # estimate lower threshold
   m_ln$setXmin(est) # update object
 
   # exponential
-  m_ex = disexp$new(test)
-  est = estimate_xmin(m_ex) # estimate lower threshold
+  m_ex = poweRlaw::disexp$new(test)
+  est = poweRlaw::estimate_xmin(m_ex) # estimate lower threshold
   m_ex$setXmin(est) # update object
 
   # poisson
-  m_po = dispois$new(test)
-  est = estimate_xmin(m_po) # estimate lower threshold
+  m_po = poweRlaw::dispois$new(test)
+  est = poweRlaw::estimate_xmin(m_po) # estimate lower threshold
   m_po$setXmin(est) # update object
 
   # view fits

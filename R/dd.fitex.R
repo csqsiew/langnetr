@@ -10,11 +10,11 @@
 #'
 
 fitex <- function(distribution, estimates = F) {
-  m_ex = disexp$new(distribution) # set up the distribution environment
-  est = estimate_xmin(m_ex)       # estimate the optimal xmin
+  m_ex = poweRlaw::disexp$new(distribution) # set up the distribution environment
+  est = poweRlaw::estimate_xmin(m_ex)       # estimate the optimal xmin
   bestxmin <- est$xmin            # save the optimal xmin
   m_ex$setXmin(est)               # assign the optimal xmin to the model
-  est = estimate_pars(m_ex)       # estimate parameters for a given xmin
+  est = poweRlaw::estimate_pars(m_ex)       # estimate parameters for a given xmin
   parameters <- est$pars          # save the parameter estimates
 
   if (estimates == T) {         # if estimates are wanted,

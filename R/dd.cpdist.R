@@ -12,10 +12,10 @@ cpdist <- function(m1, m2, output = F) {
 
   # both distributions must have the same lower threshold for comparison
   m2$setXmin(m1$getXmin()) # set the second distribution object to have the same xmin as the first object
-  est = estimate_pars(m2)    # estimate the parameters for this particular value of xmin
+  est = poweRlaw::estimate_pars(m2)    # estimate the parameters for this particular value of xmin
   m2$setPars(est)
 
-  comp = compare_distributions(m1, m2)
+  comp = poweRlaw::compare_distributions(m1, m2)
 
   print(paste('The two-sided p-value is', round(comp$p_two_sided, 3)))
   print(paste('The one-sided p-value is', round(comp$p_one_sided, 3)))

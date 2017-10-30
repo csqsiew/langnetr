@@ -15,7 +15,7 @@ getplsd <- function(model, getraw = F) { # distribution must already be fitted b
 
   set.seed(1)                                             # for replicability
   ncores <- parallel::detectCores()                       # detect number of cores in computer
-  bs = bootstrap(model, no_of_sims=1000, threads=ncores)  # run the bootstrapping process
+  bs = poweRlaw::bootstrap(model, no_of_sims=1000, threads=ncores)  # run the bootstrapping process
   xmin <- mean(bs$bootstraps[,2])                         # mean of xmin from simulations
   alpha <- mean(bs$bootstraps[,3])                        # mean of alpha from simulations
   xminsd <- sd(bs$bootstraps[,2])                         # sd of xmin from simulations

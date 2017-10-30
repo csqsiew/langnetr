@@ -10,11 +10,11 @@
 #'
 
 fitpo <- function(distribution, estimates = F) {
-  m_po = dispois$new(distribution) # set up the distribution environment
-  est = estimate_xmin(m_po)       # estimate the optimal xmin
+  m_po = poweRlaw::dispois$new(distribution) # set up the distribution environment
+  est = poweRlaw::estimate_xmin(m_po)       # estimate the optimal xmin
   bestxmin <- est$xmin            # save the optimal xmin
   m_po$setXmin(est)               # assign the optimal xmin to the model
-  est = estimate_pars(m_po)       # estimate parameters for a given xmin
+  est = poweRlaw::estimate_pars(m_po)       # estimate parameters for a given xmin
   parameters <- est$pars          # save the parameter estimates
 
   if (estimates == T) {         # if estimates are wanted,
