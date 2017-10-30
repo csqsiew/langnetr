@@ -58,10 +58,11 @@ visualize(distribution)
 
 # Get uncertainty estimates for power law fit  
 
-The `getplsd()` function characterizes the uncertainty of the parameter estimates through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.    
+The `getplsd()` function characterizes the uncertainty of the parameter estimates through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned (xmin mean, xmin sd, alpha mean, alpha sd). If `getraw = T` the raw output of the bootstrap is returned.    
 
 ```{r, eval=TRUE, include=TRUE}
 getplsd(model.pl, getraw = F) # get estimates 
+# xmin mean, xmin sd, alpha mean, alpha sd
 bsresults <- getplsd(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
 # visualize the output of the bootstrap using the raw bootstrap output 
@@ -78,15 +79,23 @@ plot(bsresults, trim=0.1) # trim=0.1 only displays the final 90% of iterations
 
 # Test the power law fit to the data  
 
-Because it is possible to fit a power law to any data, it is important to establish that the power fit **IS** in fact a good fit to the data. The `testpl()` function tests the goodness of fit of the power law to the data through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.      
+Because it is possible to fit a power law to any data, it is important to establish that the power fit **IS** in fact a good fit to the data. The `testpl()` function tests the goodness of fit of the power law to the data through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned (xmin mean, xmin sd, alpha mean, alpha sd, p value). If `getraw = T` the raw output of the bootstrap is returned.      
 
 ```{r, eval=TRUE, include=TRUE}
 testpl(model.pl, getraw = F) # get estimates 
+# xmin mean, xmin sd, alpha mean, alpha sd, p value
 bspresults <- testpl(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
 # visualize the results 
 plot(bspresults, trim=0.1) # includes the p-value of the test of pl distribution
 ```
+
+Here are the two competing hypotheses:
+
+* H0: data is generated from a power law distribution.
+* H1: data is not generated from a power law distribution.
+
+Interpreting the p-value: If p value is not significant, we cannot reject H0, i.e., we cannot rule out the power law model.   
 
 # Comparing distributions
 
@@ -105,14 +114,14 @@ Here are the two competing hypotheses:
 
 The results of the Vuong's test are very confusing. Here is what it means...   
 
-2-sided p-value:  
+*2-sided p-value:*   
 
 * if significant, then H0 is rejected
 * one of the test distributions is closer to the true distribution 
 * order of m1 and m2 does not matter for two-sided p
 * no need to look at one-sided p if two-sided p is not sig (stick with H0)
 
-1-sided p-value:   
+*1-sided p-value:*   
 
 * order of m1 and m2 matters for 1-sided p
 # m1 = left, m2 = right
