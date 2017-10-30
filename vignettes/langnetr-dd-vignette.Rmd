@@ -10,15 +10,17 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+For some reason the package works fine in R but not in the .Rmd file, so I can't render the doc fully... -CS    
+
 ## Vignette Info    
 
 The `langnetr` package was built to help the user easily convert lists of words into network objects based on an edit distance of 1. A set of functions (starting with "dd.") were added to this package to make it easy for the user to analyze the degree distributions of the language network. This vignette will demonstrate how to use the "degree distribution" functions in this package using made up data.    
 
 Note that the process for fitting a power law (and other distributions) to the data was directly replicated from the `poweRlaw` R package - [https://github.com/csgillespie/poweRlaw](https://github.com/csgillespie/poweRlaw). These are a merely a set of helper functions to automate the processes specific to the needs of a language researcher (me!).  
 
-# Se up and create a fake distribution for demonstration
+# Set up and create a fake distribution for demonstration
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(langnetr)
 library(igraph)
 
@@ -50,7 +52,7 @@ model.po <- fitpo(distribution, estimates = F)
 
 Plots a nice-ish figure of the raw data with the fits of various distributions.  
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 visualize(distribution)
 ```
 
@@ -58,7 +60,7 @@ visualize(distribution)
 
 The `getplsd()` function characterizes the uncertainty of the parameter estimates through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.    
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 getplsd(model.pl, getraw = F) # get estimates 
 bsresults <- getplsd(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
@@ -78,7 +80,7 @@ plot(bsresults, trim=0.1) # trim=0.1 only displays the final 90% of iterations
 
 Because it is possible to fit a power law to any data, it is important to establish that the power fit **IS** in fact a good fit to the data. The `testpl()` function tests the goodness of fit of the power law to the data through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.      
 
-```{r}
+```{r, eval=FALSE, include=TRUE}
 testpl(model.pl, getraw = F) # get estimates 
 bspresults <- testpl(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
