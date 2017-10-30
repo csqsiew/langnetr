@@ -14,6 +14,9 @@
 #'
 
 testpl <- function(model, getraw = F) { # distribution must already be fitted by fitpl()
+
+  requireNamespace("poweRlaw", quietly = TRUE)
+
   set.seed(1)                                                # for replicability
   ncores <- parallel::detectCores()                          # number of cores in computer
   bs_p = poweRlaw::bootstrap_p(model, no_of_sims=1000, threads=ncores) # run the bootstrapping process

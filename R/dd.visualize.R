@@ -8,6 +8,8 @@
 
 visualize <- function(distribution) {
 
+  requireNamespace("poweRlaw", quietly = TRUE)
+
   test <- distribution
 
   # power law
