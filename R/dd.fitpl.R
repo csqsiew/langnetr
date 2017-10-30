@@ -10,11 +10,11 @@
 #'
 
 fitpl <- function(distribution, estimates = F) {
-  m_pl = displ$new(distribution) # set up the distribution environment
-  est = estimate_xmin(m_pl)      # estimate the optimal xmin
+  m_pl = poweRlaw::displ$new(distribution) # set up the distribution environment
+  est = poweRlaw::estimate_xmin(m_pl)      # estimate the optimal xmin
   bestxmin <- est$xmin           # save the optimal xmin
   m_pl$setXmin(est)              # assign the optimal xmin to the model
-  est = estimate_pars(m_pl)      # estimate alpha parameter for a given xmin
+  est = poweRlaw::estimate_pars(m_pl)      # estimate alpha parameter for a given xmin
   alpha <- est$pars              # save the alpha estimate
 
   if (estimates == T) {         # if estimates are wanted,
