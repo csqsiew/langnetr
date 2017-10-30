@@ -17,7 +17,8 @@ LazyData: true
 Imports:
     dplyr,
     igraph,
-    stringdist
+    stringdist,
+    poweRlaw
 URL: http://github.com/csqsiew/langnetr 
 RoxygenNote: 6.0.1
 Suggests: knitr,

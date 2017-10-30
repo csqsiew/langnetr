@@ -1,0 +1,15 @@
+---
+title: "How to use langnetr: A simple example"
+author: "CSQ Siew"
+date: "`r Sys.Date()`"
+output: word_document
+#rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Vignette Info    
+
+The `langnetr` package was built to help the user easily convert lists of words into network objects based on an edit distance of 1. This could be useful to any researcher who is working with linguistic data and wants to build a network based on character similarity between words. Hence this would work for phonological transcriptions and orthographic representations, but not so if one were interested in semantic relationships between words. This vignette will demonstrate how to use the functions in this package using a simple example.  
