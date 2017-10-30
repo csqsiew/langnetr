@@ -17,10 +17,10 @@ testpl <- function(model, getraw = F) { # distribution must already be fitted by
   set.seed(1)                                                # for replicability
   ncores <- parallel::detectCores()                          # number of cores in computer
   bs_p = poweRlaw::bootstrap_p(model, no_of_sims=1000, threads=ncores) # run the bootstrapping process
-  xmin <- mean(bs_p$bootstraps[,2])                          # mean of xmin from simulations
-  alpha <- mean(bs_p$bootstraps[,3])                         # mean of alpha from simulations
-  xminsd <- sd(bs_p$bootstraps[,2])                          # sd of xmin from simulations
-  alphasd <- sd(bs_p$bootstraps[,3])                         # sd of alpha simulations
+  xmin <- mean(bs_p$bootstraps[,2], na.rm = T)                         # mean of xmin from simulations
+  alpha <- mean(bs_p$bootstraps[,3], na.rm = T)                        # mean of alpha from simulations
+  xminsd <- sd(bs_p$bootstraps[,2], na.rm = T)                         # sd of xmin from simulations
+  alphasd <- sd(bs_p$bootstraps[,3], na.rm = T)                        # sd of alpha simulations
   pvalue <- bs_p$p                                           # p-value for the power law test
 
   if (getraw == F) { # if raw bootstrap output is not wanted,
