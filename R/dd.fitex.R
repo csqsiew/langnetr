@@ -10,6 +10,7 @@
 #'
 
 fitex <- function(distribution, estimates = F) {
+  requireNamespace("poweRlaw", quietly = TRUE)
   m_ex = poweRlaw::disexp$new(distribution) # set up the distribution environment
   est = poweRlaw::estimate_xmin(m_ex)       # estimate the optimal xmin
   bestxmin <- est$xmin            # save the optimal xmin

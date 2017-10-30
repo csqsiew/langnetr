@@ -10,6 +10,8 @@
 
 cpdist <- function(m1, m2, output = F) {
 
+  requireNamespace("poweRlaw", quietly = TRUE)
+
   # both distributions must have the same lower threshold for comparison
   m2$setXmin(m1$getXmin()) # set the second distribution object to have the same xmin as the first object
   est = poweRlaw::estimate_pars(m2)    # estimate the parameters for this particular value of xmin

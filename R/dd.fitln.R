@@ -10,6 +10,7 @@
 #'
 
 fitln <- function(distribution, estimates = F) {
+  requireNamespace("poweRlaw", quietly = TRUE)
   m_ln = poweRlaw::dislnorm$new(distribution) # set up the distribution environment
   est = poweRlaw::estimate_xmin(m_ln)         # estimate the optimal xmin
   bestxmin <- est$xmin              # save the optimal xmin

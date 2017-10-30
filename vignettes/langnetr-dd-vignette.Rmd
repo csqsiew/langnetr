@@ -10,8 +10,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-For some reason the package works fine in R but not in the .Rmd file, so I can't render the doc fully... -CS    
-
 ## Vignette Info    
 
 The `langnetr` package was built to help the user easily convert lists of words into network objects based on an edit distance of 1. A set of functions (starting with "dd.") were added to this package to make it easy for the user to analyze the degree distributions of the language network. This vignette will demonstrate how to use the "degree distribution" functions in this package using made up data.    
@@ -23,11 +21,13 @@ Note that the process for fitting a power law (and other distributions) to the d
 ```{r, message=FALSE, warning=FALSE}
 library(langnetr)
 library(igraph)
+library(poweRlaw) # this needs to loaded as well for the langnetr package to play nice...
 
 # make a random small world network
 network <- watts.strogatz.game(1, 5000, 1, 0.35, loops = FALSE, multiple = FALSE)
-net.degree <- as.data.frame(table(as.data.frame(degree(network))))
-distribution <- net.degree$Freq # tabulated degrees of p.net, the "raw" data
+
+# use the helper function to "make" the degree distribution of a given network 
+distribution <- getdegdist(network)
 ```
 
 # Fit various distributions to the data  
@@ -52,7 +52,7 @@ model.po <- fitpo(distribution, estimates = F)
 
 Plots a nice-ish figure of the raw data with the fits of various distributions.  
 
-```{r, eval=FALSE, include=TRUE}
+```{r, eval=TRUE, include=TRUE}
 visualize(distribution)
 ```
 
@@ -60,7 +60,7 @@ visualize(distribution)
 
 The `getplsd()` function characterizes the uncertainty of the parameter estimates through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.    
 
-```{r, eval=FALSE, include=TRUE}
+```{r, eval=TRUE, include=TRUE}
 getplsd(model.pl, getraw = F) # get estimates 
 bsresults <- getplsd(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
@@ -80,7 +80,7 @@ plot(bsresults, trim=0.1) # trim=0.1 only displays the final 90% of iterations
 
 Because it is possible to fit a power law to any data, it is important to establish that the power fit **IS** in fact a good fit to the data. The `testpl()` function tests the goodness of fit of the power law to the data through bootstrapping and the results of the bootstrap can be visualized. If `getraw = F` summary statistics from the bootstrap are returned. If `getraw = T` the raw output of the bootstrap is returned.      
 
-```{r, eval=FALSE, include=TRUE}
+```{r, eval=TRUE, include=TRUE}
 testpl(model.pl, getraw = F) # get estimates 
 bspresults <- testpl(model.pl, getraw = T) # returns the raw outputs of the bootstrap 
 
@@ -117,5 +117,5 @@ The results of the Vuong's test are very confusing. Here is what it means...
 * order of m1 and m2 matters for 1-sided p
 # m1 = left, m2 = right
 # if sig, m1 is better
-# if not sig, m1 isn't better than m2 (but does that mean that m2 is better?)
+# if not sig, m1 isn't better than m2 (but does that mean that m2 is better? i.e., is the test symmetrical?)
 

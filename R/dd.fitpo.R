@@ -10,6 +10,7 @@
 #'
 
 fitpo <- function(distribution, estimates = F) {
+  requireNamespace("poweRlaw", quietly = TRUE)
   m_po = poweRlaw::dispois$new(distribution) # set up the distribution environment
   est = poweRlaw::estimate_xmin(m_po)       # estimate the optimal xmin
   bestxmin <- est$xmin            # save the optimal xmin
