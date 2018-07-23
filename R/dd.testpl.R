@@ -24,10 +24,11 @@ testpl <- function(model, getraw = F) { # distribution must already be fitted by
   alpha <- mean(bs_p$bootstraps[,3], na.rm = T)                        # mean of alpha from simulations
   xminsd <- sd(bs_p$bootstraps[,2], na.rm = T)                         # sd of xmin from simulations
   alphasd <- sd(bs_p$bootstraps[,3], na.rm = T)                        # sd of alpha simulations
+  dist <- bs_p$gof                                             # gof statistic for ks distance test
   pvalue <- bs_p$p                                           # p-value for the power law test
 
   if (getraw == F) { # if raw bootstrap output is not wanted,
-    output <- round(c(xmin, xminsd, alpha, alphasd, pvalue), 3) # return the uncertainty statistics
+    output <- round(c(xmin, xminsd, alpha, alphasd, dist, pvalue), 3) # return the uncertainty statistics
     return(output)
   } else { # if raw bootstrap is wanted, (for plotting purposes)
     return(bs_p) # return the raw bootstrap output
